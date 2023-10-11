@@ -1,4 +1,4 @@
-package entity
+package userentity
 
 import (
 	"github.com/Solon97/goexpert-api/pkg/entity"
