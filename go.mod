@@ -1,3 +1,3 @@
-module github.com/YOUR-USER-OR-ORG-NAME/YOUR-REPO-NAME
+module github.com/Solon97/goexpert-api
 
-go 1.19
+go 1.21.1
