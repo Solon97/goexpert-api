@@ -22,11 +22,11 @@ type Product struct {
 	CreatedAt time.Time `json:"createdAt"`
 }
 
-func newProduct() (*Product, error) {
+func NewProduct(name string, price int) (*Product, error) {
 	product := &Product{
 		ID:        entity.NewID(),
-		Name:      "",
-		Price:     0,
+		Name:      name,
+		Price:     price,
 		CreatedAt: time.Now(),
 	}
 
