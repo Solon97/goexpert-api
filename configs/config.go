@@ -7,6 +7,7 @@ import (
 
 var cfg *config
 
+// TODO: Tornar propriedades privadas (Aula: Outras possibilidades de configuração [Go Expert])
 type config struct {
 	DBDriver      string           `mapstructure:"DB_DRIVER"`
 	DBHost        string           `mapstructure:"DB_HOST"`
