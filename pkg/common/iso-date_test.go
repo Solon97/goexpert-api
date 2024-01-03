@@ -1,4 +1,4 @@
-package entity
+package common
 
 import (
 	"testing"
@@ -16,4 +16,10 @@ func TestISODate_UnmarshalJSON(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, date)
 	assert.Equal(t, "2022-01-01", date.Date.String())
+}
+
+func TestISODate_InvalidDate(t *testing.T) {
+	date := ISODateTest{}
+	err := date.Date.UnmarshalJSON([]byte(`"2022-01-01abc"`))
+	assert.NotNil(t, err)
 }
