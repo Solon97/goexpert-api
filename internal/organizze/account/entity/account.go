@@ -3,7 +3,7 @@ package entity
 import (
 	"fmt"
 
-	"github.com/Solon97/goexpert-api/pkg/entity"
+	"github.com/Solon97/goexpert-api/pkg/common"
 )
 
 type OrganizzeAccountValidator interface {
@@ -11,11 +11,11 @@ type OrganizzeAccountValidator interface {
 }
 
 type OrganizzeAccount struct {
-	ID                       entity.ID           `json:"id"`
+	ID                       common.ID           `json:"id"`
 	Username                 string              `json:"username"`
 	Email                    string              `json:"email"`
 	BasicToken               string              `json:"basic_token"`
-	InitialDate              entity.ISODate      `json:"initial_date"`
+	InitialDate              common.ISODate      `json:"initial_date"`
 	InstallmentRule          TransactionTypeRule `json:"installment_rule"`
 	CommitmentRule           TransactionTypeRule `json:"commitment_rule"`
 	RefundRule               TransactionTypeRule `json:"refund_rule"`
@@ -25,7 +25,7 @@ type OrganizzeAccount struct {
 	IgnoreTransactionRule    TransactionTypeRule `json:"ignore_transaction_rule"`
 }
 
-func NewOrganizzeAccount(username, email, basicToken string, initialDate entity.ISODate, accountValidator OrganizzeAccountValidator) (*OrganizzeAccount, error) {
+func NewOrganizzeAccount(username, email, basicToken string, initialDate common.ISODate, accountValidator OrganizzeAccountValidator) (*OrganizzeAccount, error) {
 	// validar conta
 	isValidAccount, err := accountValidator.IsValidAccount(username, email, basicToken)
 	if err != nil {
@@ -37,7 +37,7 @@ func NewOrganizzeAccount(username, email, basicToken string, initialDate entity.
 	}
 
 	return &OrganizzeAccount{
-		ID:          entity.NewID(),
+		ID:          common.NewID(),
 		Username:    username,
 		Email:       email,
 		BasicToken:  basicToken,

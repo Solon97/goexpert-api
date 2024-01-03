@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Solon97/goexpert-api/pkg/entity"
+	"github.com/Solon97/goexpert-api/pkg/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -23,7 +23,7 @@ func TestNewOrganizzeAccount(t *testing.T) {
 	validator := new(MockAccountValidator)
 	validator.On("IsValidAccount", "testUser", "test@example.com", "token123").Return(true, nil)
 
-	isoDate := entity.ISODate(time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC))
+	isoDate := common.ISODate(time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC))
 	organizzeAccount, err := NewOrganizzeAccount("testUser", "test@example.com", "token123", isoDate, validator)
 	assert.Nil(t, err)
 	assert.NotNil(t, organizzeAccount)
@@ -37,7 +37,7 @@ func TestNewOrganizzeAccount(t *testing.T) {
 func TestInvalidCredentials(t *testing.T) {
 	validator := new(MockAccountValidator)
 	validator.On("IsValidAccount", "testUser", "test@example.com", "token123").Return(false, nil)
-	isoDate := entity.ISODate(time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC))
+	isoDate := common.ISODate(time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC))
 	_, err := NewOrganizzeAccount("testUser", "test@example.com", "token123", isoDate, validator)
 	assert.NotNil(t, err)
 	assert.Error(t, err, "invalid credentials")
@@ -46,7 +46,7 @@ func TestInvalidCredentials(t *testing.T) {
 func TestIsValidAccountError(t *testing.T) {
 	validator := new(MockAccountValidator)
 	validator.On("IsValidAccount", "testUser", "test@example.com", "token123").Return(false, fmt.Errorf("some error"))
-	isoDate := entity.ISODate(time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC))
+	isoDate := common.ISODate(time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC))
 	_, err := NewOrganizzeAccount("testUser", "test@example.com", "token123", isoDate, validator)
 	assert.NotNil(t, err)
 	assert.Error(t, err, "account validation error: some error")
